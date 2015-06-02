@@ -20,7 +20,7 @@ public:
         int cur = nums[0];
         int ptr = 1;
         for ( int i=1; i < nums.size(); i++){
-            if(nums[i] xor cur){
+            if(nums[i] != cur){
                 nums[ptr] = nums[i];
                 cur = nums[ptr];
                 ptr++;
