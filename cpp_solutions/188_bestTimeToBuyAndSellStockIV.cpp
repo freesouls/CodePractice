@@ -12,7 +12,7 @@ public:
         for (int i=0; i < n - 1; i++){
             int diff = prices[i+1] - prices[i];
             //http://blog.csdn.net/foreverling/article/details/43911309
-            // if start from j = 1 and diff > 0
+            // if start from j = 1 when comes to the first diff > 0
             // local[j] = global[j-1]+diff, global[j] = local[j];
             // local and global will become very large, not the correct update way
             for (int j = k; j>=1; j--){
