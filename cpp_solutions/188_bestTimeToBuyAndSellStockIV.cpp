@@ -5,13 +5,16 @@ public:
         int n = prices.size();
         if (n < 2) return 0;
         if (k >= n) return maxProfit(prices);
-        int local[k+1] = {0};
-        int global[k+1] = {0};
-        
+        //int local[k+1] = {0};
+        //int global[k+1] = {0};
+        vector<int> local(k+1,0);
+        vector<int> global(k+1,0);
         for (int i=0; i < n - 1; i++){
             int diff = prices[i+1] - prices[i];
             //http://blog.csdn.net/foreverling/article/details/43911309
-            // 
+            // if start from j = 1 and diff > 0
+            // local[j] = global[j-1]+diff, global[j] = local[j];
+            // local and global will become very large, not the correct update way
             for (int j = k; j>=1; j--){
                 local[j] = max(global[j-1]+(diff > 0? diff:0), local[j]+diff);
                 global[j] = max(global[j], local[j]);
