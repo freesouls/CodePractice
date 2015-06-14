@@ -10,6 +10,8 @@ public:
         
         for (int i=0; i < n - 1; i++){
             int diff = prices[i+1] - prices[i];
+            //http://blog.csdn.net/foreverling/article/details/43911309
+            // 
             for (int j = k; j>=1; j--){
                 local[j] = max(global[j-1]+(diff > 0? diff:0), local[j]+diff);
                 global[j] = max(global[j], local[j]);
@@ -31,3 +33,42 @@ public:
     }
     
 };
+
+
+
+/* for large K, time exceed!!!
+class Solution {
+public:
+    int max_res = 0;
+    int n = 0;
+    int kk = 0;
+    int maxProfit(int k, vector<int>& prices) {
+        n = prices.size();
+        if (n < 2) return 0;
+        max_res = 0;
+        kk = k;
+        int res = 0;
+        int start = 0;
+        
+        maxProfit(prices, res, start, 0);
+        return max_res;
+    }
+    
+    void maxProfit(vector<int>& prices, int res, int start, int k){
+        if (k == kk || start >= n - 1) {
+            max_res = max(max_res, res);
+            return;
+        }
+        
+        int min_price = prices[start];
+        int profit = 0;
+        for (int i = start + 1; i < prices.size(); i++){
+            profit = max(profit, prices[i] - min_price);
+            min_price = min(min_price, prices[i]);
+            res += profit;
+            maxProfit(prices, res, i, k+1);
+            res -= profit;
+        }
+    }
+};
+*/
