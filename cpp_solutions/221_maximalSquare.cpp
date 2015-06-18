@@ -20,7 +20,7 @@ public:
             return 0;
         }
         // matrix has more than two rows
-        int* p1 = new int[n];
+        int* p1 = new int[n]; // dp[i][j] is too large, use two array will suffice, but needs change the pointer after each iteration
         int* p2 = new int[n];
         memset(p1, 0, sizeof(int)*n);
         memset(p2, 0, sizeof(int)*n);
@@ -61,7 +61,7 @@ public:
                 for (int j = 0; j < n; j++){
                     height[j] = matrix[i][j] == '0'? 0: height[j] + 1;
                 }
-                res = max(res, largestSquareLength(height)); // version 1
+                res = max(res, largestSquareLength(height)); // version 1, comes from problem: Maximal Rectangle Area
                 //res = max(res, largestSquareArea(height)); // version 2
             }
             
