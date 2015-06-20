@@ -2,43 +2,27 @@ class TrieNode {
 public:
     // Initialize your data structure here.
     TrieNode() {
-        //dic.clear();
         isWord = false;
-    }
-    
-    TrieNode(char a){
-        c = a;
-        //dic.clear();
-        isWord = false;
-    }
-    
-    // bool containChar(char a){
-    //     return dic.find(a) != dic.end()? true; false;
-    // }
-    
-    inline void addChild(char a, TrieNode* t){
-        dic[a] = t;
-    }
-    
-    inline TrieNode* containChar(char a){
-        if(dic.find(a) != dic.end()){
-            return dic[a];
-        }
-        else{
-            return NULL;
+        for (int i = 0; i < 26; i++){
+            dic[i] = NULL;
         }
     }
     
+    void addChild(int ch, TrieNode* node){
+        dic[ch] = node;
+    }
+
 public:
+    //char c;
     bool isWord;
-    char c;
-    map<char, TrieNode*> dic;
+    TrieNode* dic[26];
 };
 
 class Trie {
 public:
     Trie() {
         root = new TrieNode();
+        root->isWord = true;
     }
 
     // Inserts a word into the trie.
@@ -48,40 +32,32 @@ public:
         TrieNode* current = NULL;
         int i = 0;
         for (; i < s.size(); i++){
-            current = node->containChar(s[i]);
-            if (current){
-                node = current;
-            }
-            else{
+            current = node->dic[s[i] - 'a'];
+            if (!current){
                 break;
             }
+            node = current;
         }
         
         for (; i < s.size(); i++){
-            TrieNode* tmp = new TrieNode(s[i]);
-            node->addChild(s[i], tmp);
+            TrieNode* tmp = new TrieNode();
+            node->addChild(s[i] - 'a', tmp);
             node = tmp;
         }
         node->isWord = true;
-        
     }
 
     // Returns if the word is in the trie.
     bool search(string key) {
         if (key.size() == 0) return true;
-
         TrieNode* node = root;
-        TrieNode* current = NULL;
         for (int i = 0; i < key.size(); i++){
-            current = node->containChar(key[i]);
-            if (current){
-                node = current;
-            }
-            else{
+            node = node->dic[key[i] - 'a'];
+            if (!node){
                 return false;
             }
         }
-        return current->isWord;
+        return node->isWord;
     }
 
     // Returns if there is any word in the trie
@@ -89,13 +65,9 @@ public:
     bool startsWith(string prefix) {
         if (prefix.size() == 0) return true;
         TrieNode* node = root;
-        TrieNode* current = NULL;
         for (int i = 0; i < prefix.size(); i++){
-            current = node->containChar(prefix[i]);
-            if (current){
-                node = current;
-            }
-            else{
+            node = node->dic[prefix[i] - 'a'];
+            if (!node){
                 return false;
             }
         }
