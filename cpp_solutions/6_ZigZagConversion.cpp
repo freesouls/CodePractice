@@ -1,7 +1,6 @@
 #include<string>
 #include<stdint.h>
 using namespace std;
-
 class Solution {
 public:
 	string convert(string s, int nRows) {
@@ -35,7 +34,7 @@ public:
 			{
 				tmp.append(s, shang*divide + divide - i, 1);
 			}
-			
+
 		}
 		return tmp;
 	}

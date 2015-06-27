@@ -15,7 +15,7 @@ public:
             res++;
         }
         for (int j = 0; j < n; j++) {
-            if (!cols[j]){
+            if (!cols[j]){ // check is at same column
                 bool flag = true;
                 for (int i = 0; i < row; i++){
                     // check if is at the same diagnal or anti-diagnal
