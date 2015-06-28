@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // KMP algorithm: http://blog.csdn.net/v_july_v/article/details/7041827
+    // https://leetcode.com/discuss/36807/c-8-ms-kmp-based-o-n-time-%26-o-n-memory-solution
     string shortestPalindrome(string s) {
         string r = s;
         reverse(r.begin(), r.end());
