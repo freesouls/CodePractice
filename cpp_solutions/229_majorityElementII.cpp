@@ -34,7 +34,7 @@ public:
                 count2++;
             }
         }
-        
+
         vector<int> res;
         if (count1 > n/3){
             res.push_back(can1);
