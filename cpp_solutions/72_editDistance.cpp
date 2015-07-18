@@ -16,6 +16,8 @@ public:
             d[0] = i;
             for (int j = 1; j <= n; j++){
                 int tmp = d[j];
+                // d[i,j] = min(d[i-1,j]+1, d[i,j-1]+1, d[i-1,j-1]+x(i-1)==y(j-1)?0:1);
+                //              insert,     delete,     substitute
                 if (word1[i-1] == word2[j-1]){
                     d[j] = upper_left;
                 }
