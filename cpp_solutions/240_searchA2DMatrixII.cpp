@@ -8,6 +8,31 @@ public:
         int m = matrix.size();
         int n = matrix[0].size();
         //int i = 0;
+        int i = 0, j = n-1;
+        while(i < m && j >=0){
+            if (matrix[i][j] == target){
+                return true;
+            }
+            else if (matrix[i][j] > target){
+                j--;
+            }
+            else{
+                i++;
+            }
+            
+        }
+        
+        return false;
+    }
+
+    bool searchMatrix1(vector<vector<int>>& matrix, int target) {
+        if (matrix.size() == 0 || matrix[0].size() == 0){
+            return false;
+        }
+        
+        int m = matrix.size();
+        int n = matrix[0].size();
+        //int i = 0;
         
         for (int i = 0; i < m; i++){
             if (target < matrix[i][0]){
