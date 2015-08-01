@@ -16,7 +16,7 @@ class Solution:
     def isAnagram1(self, s, t):
         if len(s) != len(t):
             return False
-        count = [0]*256
+        count = [0]*128
         for char in s:
             count[ord(char)] += 1
         for char in t:
@@ -27,4 +27,3 @@ class Solution:
             if x > 0:
                 return False
         return True
-        

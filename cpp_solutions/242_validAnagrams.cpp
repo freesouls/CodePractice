@@ -4,7 +4,7 @@ public:
         if (s.length() != t.length()){
             return false;
         }
-        vector<int> count(256, 0);
+        vector<int> count(128, 0);
         for (int i = 0; i < s.length(); i++){
             count[s[i]]++;
         }
