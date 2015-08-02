@@ -20,21 +20,21 @@ class Solution:
             l1 = l1.next
             l2 = l2.next
 
-        if l1 and not l2:
-            while l1:
-                tmp = l1.val + carry
-                carry = tmp/10
-                head.next = ListNode(tmp%10)
-                head = head.next
-                l1 = l1.next
+        #if l1 and not l2:
+        while l1:
+            tmp = l1.val + carry
+            carry = tmp/10
+            head.next = ListNode(tmp%10)
+            head = head.next
+            l1 = l1.next
 
-        if l2 and not l1:
-            while l2:
-                tmp = l2.val + carry
-                carry = tmp/10
-                head.next = ListNode(tmp%10)
-                head = head.next
-                l2 = l2.next
+        # if l2 and not l1:
+        while l2:
+            tmp = l2.val + carry
+            carry = tmp/10
+            head.next = ListNode(tmp%10)
+            head = head.next
+            l2 = l2.next
 
         if carry == 1:
             head.next = ListNode(1)
