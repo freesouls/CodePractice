@@ -24,7 +24,7 @@ public:
 		int maxLen = 0, len=0;
 		int left = 0;
 		for (int i = 0; i < s.size(); i++){
-		    if (cnt[s[i]] != -1 && cnt[s[i]] >= left){
+		    if (cnt[s[i]] >= left){
 		        left = cnt[s[i]] + 1;
 		    }
 

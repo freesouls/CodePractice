@@ -1,7 +1,7 @@
 class Solution:
     # @param {string} s
     # @return {integer}
-    def lengthOfLongestSubstring(self, s):
+    def lengthOfLongestSubstring0(self, s):
         d = {}
         max_len = 0
         left = 0
@@ -12,14 +12,14 @@ class Solution:
             max_len = max(max_len, i - left + 1)
         return max_len
 
-    def lengthOfLongestSubstring0(self, s):
+    def lengthOfLongestSubstring(self, s):
         # d = {}
         d = [-1]*128
         max_len = 0
         left = 0
         for i, ch in enumerate(s):
             index = ord(ch)
-            if d[index] != -1 and d[index] >= left:
+            if d[index] >= left:
                 left = d[index] + 1
             d[index] = i
             max_len = max(max_len, i - left + 1)
