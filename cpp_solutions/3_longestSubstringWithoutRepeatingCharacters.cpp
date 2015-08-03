@@ -3,8 +3,8 @@
 using namespace std;
 /*
 Given a string, find the length of the longest substring without repeating
-characters. For example, the longest substring without repeating letters 
-for "abcabcbb" is "abc", which the length is 3. For "bbbbb" the longest 
+characters. For example, the longest substring without repeating letters
+for "abcabcbb" is "abc", which the length is 3. For "bbbbb" the longest
 substring is "b", with the length of 1.
 */
 
@@ -18,14 +18,32 @@ int max(int a, int b)
 class Solution {
 public:
 	int lengthOfLongestSubstring(string s) {
-  
+		vector<int> cnt(128, -1);
+        // fill(cnt, cnt+128, -1);
+
+		int maxLen = 0, len=0;
+		int left = 0;
+		for (int i = 0; i < s.size(); i++){
+		    if (cnt[s[i]] != -1 && cnt[s[i]] >= left){
+		        left = cnt[s[i]] + 1;
+		    }
+
+		    cnt[s[i]] = i;
+		    maxLen = max(maxLen, i - left + 1);
+		}
+
+		return maxLen;
+	}
+
+	int lengthOfLongestSubstring1(string s) {
+
 		int index[MAX_CHAR]; // -1 means unknown index
 		memset(index, -1, MAX_CHAR * sizeof(int));//set all the index to -1
 
 		int maxLen = 0, len=0;
 		for (int i = 0; i < s.size(); i++)
 		{
-			if (index[s[i]-'\0']>=0) // use '\0' is because the character can be anything like ',' 
+			if (index[s[i]-'\0']>=0) // use '\0' is because the character can be anything like ','
 			{
 				maxLen = max(maxLen, len);
 				len = 0;
@@ -38,6 +56,7 @@ public:
 
 		return max(len, maxLen);
 	}
+
 };
 
 int main()
