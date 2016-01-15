@@ -1,3 +1,4 @@
+// 24ms
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
@@ -23,5 +24,43 @@ public:
             len = max(len, cur);
         }
         return len;
+    }
+};
+
+// 24ms
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        unordered_set<int> s;
+        for (int i = 0; i < nums.size(); i++ ) {
+            s.insert(nums[i]);
+        }
+        
+        int max_cnt = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (s.find(nums[i]) != s.end()) {
+                int cnt = 1;
+                s.erase(nums[i]);
+                int val = nums[i]-1;
+                while(s.find(val) != s.end()) {
+                    cnt++;
+                    s.erase(val);
+                    val--;
+                }
+                
+                val = nums[i]+1;
+                while(s.find(val) != s.end()) {
+                    cnt++;
+                    s.erase(val);
+                    val++;
+                }
+                
+                if (cnt > max_cnt) {
+                    max_cnt = cnt;
+                }
+            }
+            
+        }
+        return max_cnt;
     }
 };
