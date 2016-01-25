@@ -75,18 +75,18 @@ int main()
 
         if (j < n) {
             int tmp = abs(nodes_x[i]->x - nodes_x[j]->x);
-            if (nodes_x[i]->adj.find(nodes_x[j]->id) != nodes_x[i]->adj.end()) {
-                nodes_x[i]->adj[nodes_x[j]->id] = std::max(tmp, nodes_x[i]->adj[nodes_x[j]->id]);
-            }
-            else {
+            // if (nodes_x[i]->adj.find(nodes_x[j]->id) != nodes_x[i]->adj.end()) {
+                // nodes_x[i]->adj[nodes_x[j]->id] = std::min(tmp, nodes_x[i]->adj[nodes_x[j]->id]);
+            // }
+            // else {
                 nodes_x[i]->adj[nodes_x[j]->id] = tmp;
-            }
-            if (nodes_x[j]->adj.find(nodes_x[i]->id) != nodes_x[j]->adj.end()) {
-                nodes_x[j]->adj[nodes_x[i]->id] = std::max(tmp, nodes_x[j]->adj[nodes_x[i]->id]);
-            }
-            else {
+            // }
+            // if (nodes_x[j]->adj.find(nodes_x[i]->id) != nodes_x[j]->adj.end()) {
+                // nodes_x[j]->adj[nodes_x[i]->id] = std::min(tmp, nodes_x[j]->adj[nodes_x[i]->id]);
+            // }
+            // else {
                 nodes_x[j]->adj[nodes_x[i]->id] = tmp;
-            }
+            // }
         }
     }
 
@@ -107,19 +107,19 @@ int main()
             j++;
         }
         if (j < n) {
-            int tmp = abs(nodes_y[i]->y - nodes_y[j]->y);
-            if (nodes_y[i]->adj.find(nodes_y[j]->id) != nodes_y[i]->adj.end()) {
-                nodes_y[i]->adj[nodes_y[j]->id] = std::max(tmp, nodes_y[i]->adj[nodes_y[j]->id]);
-            }
-            else {
+            int tmp = std::min(abs(nodes_y[i]->y - nodes_y[j]->y), abs(nodes_y[i]->x - nodes_y[j]->x));
+            // if (nodes_y[i]->adj.find(nodes_y[j]->id) != nodes_y[i]->adj.end()) {
+                // nodes_y[i]->adj[nodes_y[j]->id] = std::min(tmp, nodes_y[i]->adj[nodes_y[j]->id]);
+            // }
+            // else {
                 nodes_y[i]->adj[nodes_y[j]->id] = tmp;
-            }
-            if (nodes_y[j]->adj.find(nodes_y[i]->id) != nodes_y[j]->adj.end()) {
-                nodes_y[j]->adj[nodes_y[i]->id] = std::max(tmp, nodes_y[j]->adj[nodes_y[i]->id]);
-            }
-            else {
+            // }
+            // if (nodes_y[j]->adj.find(nodes_y[i]->id) != nodes_y[j]->adj.end()) {
+                // nodes_y[j]->adj[nodes_y[i]->id] = std::min(tmp, nodes_y[j]->adj[nodes_y[i]->id]);
+            // }
+            // else {
                 nodes_y[j]->adj[nodes_y[i]->id] = tmp;
-            }
+            // }
         }
     }
 
@@ -155,6 +155,9 @@ int main()
                     unknown_vertex.insert(W);
                 }
             }
+        }
+        if (V == n-1) {
+            break;
         }
     }
 
