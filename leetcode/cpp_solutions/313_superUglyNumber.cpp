@@ -26,22 +26,23 @@ public:
             i++;
         }
 
-//        priority_queue<Node, vector<Node>, NodeComp> min_heap;
-//        for (int i = 0; i < k; i++) {
-//            min_heap.push(Node(primes[i], i));
-//        }
-//
-//        int i = 1;
-//        while(i < n) {
-//            Node min_node = min_heap.top();
-//            res[i] = min_node.val;
-//            min_heap.pop();
-//            int index = min_node.index;
-//            min_node.val = primes[index]*res[++primes_index[index]];
-////            primes_index[index]++;
-//            min_heap.push(min_node);
-//            i++;
-//        }
+    //    priority_queue<Node, vector<Node>, NodeComp> min_heap;
+    //    for (int i = 0; i < k; i++) {
+    //        min_heap.push(Node(primes[i], i));
+    //    }
+       //
+    //    int i = 1;
+    //    while(i < n) {
+    //        Node min_node = min_heap.top();
+    //        res[i] = min_node.val;
+    //        // pop all the nodes' value = min_node.val
+    //        // and reset the primes_index
+    //        min_heap.pop();
+    //        int index = min_node.index;
+    //        min_node.val = primes[index]*res[++primes_index[index]];
+    //        min_heap.push(min_node);
+    //        i++;
+    //    }
         return res[n-1];
     }
 };
