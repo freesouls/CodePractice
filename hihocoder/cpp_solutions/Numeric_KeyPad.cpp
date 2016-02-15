@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -24,14 +25,13 @@ bool dfs(string& K, string& res, int depth, bool flag, int last)
     if (flag) {
         int sub = K.length() - res.length();
         char ch = '9';
-        if (res[depth] == '0') {
+        if (res[depth-1] == '0') {
             ch = '0';
         }
 
         for (int i = 0; i < sub; i++) {
             res.push_back(ch);
         }
-
         return true;
     }
 
@@ -42,9 +42,9 @@ bool dfs(string& K, string& res, int depth, bool flag, int last)
             if (dfs(K, res, depth + 1, res[depth] < K[depth], i)) {
                 return true;
             }
-            else {
-                res.pop_back();
-            }
+            // else { // it is OK, whether use else or not
+            res.pop_back();
+            // }
         }
     }
     return false;
@@ -62,3 +62,12 @@ int main()
         cout << res << endl;
     }
 }
+/*
+8
+213
+131
+83
+2303
+123454321
+12364321
+*/
