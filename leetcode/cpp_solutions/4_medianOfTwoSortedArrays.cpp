@@ -1,3 +1,45 @@
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int m = nums1.size();
+        int n = nums2.size();
+        if ((m+n)%2) { // is odd
+            return findKth(nums1, 0, m, nums2, 0, n, (m+n)/2+1);
+        }
+        else{
+            return (findKth(nums1, 0, m, nums2, 0, n, (m+n)/2) + findKth(nums1, 0, m, nums2, 0, n, (m+n)/2+1))/2.0;
+        }
+    }
+
+    int findKth(vector<int>& nums1, int left1, int m,
+                   vector<int>& nums2, int left2, int n, int k) {
+        if (m > n) {
+            return findKth(nums2, left2, n, nums1, left1, m, k);
+        }
+
+        if (m == 0) {
+            return nums2[left2+k-1];
+        }
+
+        if (k == 1) {
+            return std::min(nums1[left1], nums2[left2]);
+        }
+
+        int pa = std::min(k/2, m);
+        int pb = k - pa;
+
+        if (nums1[left1 + pa-1] > nums2[left2 + pb - 1]) {
+            return findKth(nums1, left1, m, nums2, left2+pb, n-pb, k-pb);
+        }
+        else if (nums1[left1 + pa-1] < nums2[left2+pb-1]) {
+            return findKth(nums1, left1+pa, m-pa, nums2, left2, n, k-pa);
+        }
+        else {
+            return nums1[left1+pa-1];
+        }
+    }
+};
+
 using namespace std;
 
 /*
@@ -46,15 +88,15 @@ public:
 
 	}
 
-	double findMedianSortedArrays(int A[], int m, int B[], int n) 
+	double findMedianSortedArrays(int A[], int m, int B[], int n)
 	{
-		if ((m + n) % 2 == 1) // use (m+n) & 0x1 may be faster 
+		if ((m + n) % 2 == 1) // use (m+n) & 0x1 may be faster
 		{
 			return findKth(A, m, B, n, (m + n) / 2 + 1);
 		}
 		else
 		{
-			return (findKth(A, m, B, n, (m + n) / 2) 
+			return (findKth(A, m, B, n, (m + n) / 2)
 				+ findKth(A, m, B, n, (m + n) / 2 + 1)) / 2;
 		}
 	}
