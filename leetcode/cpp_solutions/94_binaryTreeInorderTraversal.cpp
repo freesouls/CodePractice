@@ -7,6 +7,33 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> res;
+        TreeNode* cur = root;
+        stack<TreeNode*> st;
+        while(cur != NULL || !st.empty()) {
+            while (cur) {
+                st.push(cur);
+                cur = cur->left;
+            }
+            TreeNode* node = st.top();
+            st.pop();
+            res.push_back(node->val);
+            cur = node->right;
+        }
+        return res;
+    }
+};
+
 class Solution {
 public:
     //http://blog.csdn.net/linhuanmars/article/details/20187257
@@ -38,7 +65,7 @@ public:
         }
         return res;
     }
-    
+
     // version 1
     // vector<int> inorderTraversal(TreeNode* root) {
     //     vector<int> res;
@@ -51,13 +78,13 @@ public:
     //     res.push_back(node->val);
     //     if (node->right) inorder(node->right, res);
     // }
-    
+
     // version 2
     // vector<int> inorderTraversal(TreeNode* root) {
     //     vector<int> res;
     //     if (root == NULL) return res;
     //     stack<TreeNode*> s;
-        
+
     //     TreeNode* node = root;
     //     while(node || !s.empty() ){
     //         if (node != NULL){
