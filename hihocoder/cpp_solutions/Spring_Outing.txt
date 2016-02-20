@@ -1,0 +1,78 @@
+题目1 : Spring Outing
+时间限制:20000ms
+单点时限:1000ms
+内存限制:256MB
+描述
+You class are planning for a spring outing. N people are voting for a destination out of K candidate places.
+
+The voting progress is below:
+
+First the class vote for the first candidate place. If more than half of the class agreed on the place, the place is selected. The voting ends.
+
+Otherwise they vote for the second candidate place. If more than half of the class agreed on the place, the place is selected. The voting ends.
+
+Otherwise they vote for the third candidate place in the same way and go on.
+
+If no place is selected at last there will be no spring outing and everybody stays at home.
+
+Before the voting, the Chief Entertainment Officer did a survey, found out every one's preference which can be represented as a permutation of 0, 1, ... K. (0 is for staying at home.) For example, when K=3, preference "1, 0, 2, 3" means that the first place is his first choice, staying at home is the second choice, the second place is the third choice and the third place is the last choice.
+
+The Chief Entertainment Officer sends the survey results to the class. So everybody knows the others' preferences. Everybody wants his more prefered place to be selected. And they are very smart, they always choose the optimal strategy in the voting progress to achieve his goal.
+
+Can you predict which place will be selected?
+
+输入
+The first line contains two integers, N and K, the number of people in your class and the number of candidate places.
+
+The next N lines each contain a permutation of 0~K, representing someone's preference.
+
+For 40% of the data, 1 <= N, K <= 10
+
+For 100% of the data, 1 <= N, K <= 1000
+
+输出
+Output the selected place. Or "otaku" without quotes if no place is selected.
+
+样例提示
+In the sample case, if the second peoson vote against the first place, no place would be selected finally because the first person must vote against the second place for his own interest. Considering staying at home is a worse choice than the first place, the second person's optimal strategy is voting for the first place. So the first place will be selected.
+
+样例输入
+2 2
+1 0 2
+2 1 0
+样例输出
+1
+
+题目大意
+有n个人对决定出去游玩，他们有m个备选的游玩地点(1..m)或者选择干脆宅在家(0)。每个人在自己心目中对这m+1(0..m)个地点有一个排名，他们会根据这个列表进行投票。
+
+对于m个地点，按1,2,3,...,m的顺序依次进行表决。当某一个方案票数超过一半时，则投票结束，选择这个地点作为结果。如果m个地点都没有超过半数，那就选择每个人都宅在家里。
+
+现在将每一个人心目中的排名公布出来，即每个人都知道所有人对于m+1个地点的排名。同时他们都非常聪明，会尽量让自己更喜欢的地点胜出，求问最后会选择哪一个地方作为游玩地点。
+
+解题思路
+本题的关键在于想明白每个人是如何决策的。原题在Hint中针对样例数据简单(有点模糊)地解释了每个人是如何决策的，对我们有一定的提示作用。请原谅出题人不能在Hint中解释得更加清楚——如果解释得更加清楚的话，基本上就是把解法讲明了。:P
+
+如果我们从最后一轮（对地点m的）投票开始分析，每个人的决策就会一目了然。
+
+假设我们已经进行到了最后一轮，需要对地点m进行投票。这时每个人都知道：如果地点m没有超过半数，那么最终的结果就是宅在家里（地点0）。于是所有认为m比0好的人必然投赞成票，而所有认为0比m好的人必然投反对票。所以如果进入到了最后一轮，那么最终选出的地点是确定的，我们不妨记为result[m]。（如果赞成票多于反对票，那么result[m]=m，否则result[m]=0。对于确定的输入数据，result[m]是唯一确定的。)
+
+现在假设我们进行到倒数第二轮，需要对地点m-1进行投票。根据以上分析，这时每个人都知道：如果地点m-1没有超过半数，那么最终的结果就是result[m]。于是所有认为m-1比result[m]好的人必然投赞成票，而所有认为result[m]比m-1好的人必然投反对票。最终选出的地点也是确定的，我们不妨记为result[m-1]。
+
+以此类推，我们可以求得result[m-2], result[m-3], ..., result[2], result[1]。其中result[1]就是本题的答案。
+
+整个过程写成伪代码为：
+
+result = 0
+For i = m .. 1
+    vote = 0
+    For j = 1 .. n
+        If (rank[j][i] < rank[j][result]) Then
+            vote = vote + 1
+        End If
+    End For
+    If (vote > n / 2) Then
+        result = i
+    End If
+End For
+其中rank[j][i]表示表示第j个人心中，地点i的排名，值越小越靠前；同时把result数组简化为一个变量(这是由于计算result[i]时只需要result[i+1]的值)。
