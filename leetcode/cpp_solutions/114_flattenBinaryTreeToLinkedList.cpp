@@ -23,5 +23,29 @@ public:
         flatten(root->left);
         flatten(right);
     }
-    
+
+};
+
+class Solution {
+public:
+    TreeNode* pre = NULL;
+    void flatten(TreeNode* root) {
+        pre = NULL;
+        preorder(root);
+        // return root;
+    }
+
+    void preorder(TreeNode* root) {
+        if (root == NULL) {
+            return;
+        }
+        TreeNode* tmp = root->right;
+        if (pre != NULL) {
+            pre->left = NULL;
+            pre->right = root;
+        }
+        pre = root;
+        preorder(root->left);
+        preorder(tmp);
+    }
 };

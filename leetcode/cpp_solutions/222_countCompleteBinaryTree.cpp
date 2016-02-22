@@ -18,7 +18,7 @@ public:
         }
         return 1 + countNodes(root->left) + countNodes(root->right);
     }
-    
+
     int getHeight(TreeNode* root, int direction){
         int max_height = 0;
         if (direction){
@@ -34,5 +34,35 @@ public:
         }
         return max_height;
     }
-    
+
+};
+
+class Solution {
+public:    
+    int countNodes(TreeNode* root) {
+        if (root == NULL) {
+            return 0;
+        }
+
+        int left = 0;
+        TreeNode* node = root;
+        while(node->left) {
+           left++;
+           node = node->left;
+        }
+
+        int right = 0;
+        node = root;
+        while(node->right) {
+           right++;
+           node = node->right;
+        }
+
+        if (left == right) {
+           return pow(2, left+1) - 1;
+        }
+        else {
+           return 1 + countNodes(root->left) + countNodes(root->right);
+        }
+    }
 };
