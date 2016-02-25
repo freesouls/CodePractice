@@ -16,6 +16,16 @@ public:
             }
         }
         return dp[m];
+
+        // vector<int> dp(m+1, 0);
+        // for (int i = 0; i < A.size(); i++) {
+        //     vector<int> new_dp = dp;
+        //     for (int j = A[i]; j <= m; j++) {
+        //         new_dp[j] = std::max(dp[j], dp[j-A[i]] + V[i]);
+        //     }
+        //     dp = new_dp;
+        // }
+        // return dp[m];
     }
 };
 
