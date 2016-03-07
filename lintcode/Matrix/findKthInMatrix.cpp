@@ -1,3 +1,9 @@
+struct cmp{
+    bool operator() (pair<int, pair<int, int> >  &a, pair<int, pair<int, int> > & b ){
+        return b.first < a.first;
+    }
+};
+
 class Solution {
 public:
     /**
@@ -11,7 +17,7 @@ public:
         int n = matrix[0].size();
 
         priority_queue<pair<int, pair<int, int> >, vector<pair<int, pair<int, int> > >, greater<pair<int,pair<int,int> > > > q;
-        // priority_queue<pair<int, pair<int, int> >, vector<pair<int, pair<int,int> > > , greater<pair<int,pair<int,int>> >> q;
+        // priority_queue<pair<int, pair<int, int> >, vector<pair<int, pair<int, int> > >, cmp> q;
         vector<vector<bool>> visited(m, vector<bool>(n, false));
 
         q.push(make_pair(matrix[0][0], make_pair(0,0)));
