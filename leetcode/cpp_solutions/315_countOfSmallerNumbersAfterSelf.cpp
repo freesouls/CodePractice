@@ -1,9 +1,10 @@
+// https://leetcode.com/discuss/73509/nlogn-time-space-mergesort-solution-with-detail-explanation
 class Node {
 public:
     int value;
     int index;
     Node(int val, int ind): value(val), index(ind) {};
-    
+
 };
 
 class Solution {
@@ -21,7 +22,7 @@ public:
         merge_sort(res, 0, nums.size() - 1);
         return res;
     }
-    
+
     void merge_sort(vector<int>& res, int start, int end) {
         if (start>= end) {
             return;
@@ -35,7 +36,7 @@ public:
         }
         int i = start;
         int j = mid + 1;
-        
+
         // vector<Node* > tmp(end - start + 1, NULL);
         int p = 0;
         while(i <= mid && j <= end) {
@@ -51,20 +52,20 @@ public:
                 // j++;
             }
         }
-        
+
         while(i <= mid) {
             res[arr[i]->index] += j - (mid + 1);
             // tmp.push_back(arr[i]);
             tmp[p++] = arr[i++];
             // i++;
         }
-        
+
         while(j <= end) {
             // tmp.push_back(arr[j]);
             tmp[p++] = arr[j++];
             // j++;
         }
-        
+
         for (int i = start; i <= end; i++) {
             arr[i] = tmp[i-start];
         }
@@ -77,7 +78,7 @@ public:
     int value;
     int index;
     Node(int val, int ind): value(val), index(ind) {};
-    
+
 };
 
 class Solution {
@@ -89,12 +90,12 @@ public:
         for (int i = 0; i < nums.size(); i++) {
             arr.push_back(new Node(nums[i], i));
         }
-        
+
         vector<int> res(nums.size(), 0);
         merge_sort(res, 0, nums.size() - 1);
         return res;
     }
-    
+
     void merge_sort(vector<int>& res, int start, int end) {
         if (start >= end) {
             return;
@@ -104,7 +105,7 @@ public:
         merge_sort(res, mid+1, end);
         int i = start;
         int j = mid + 1;
-        
+
         vector<Node* > tmp(end - start + 1, NULL);
         int p = 0;
         while(i <= mid && j <= end) {
@@ -118,18 +119,18 @@ public:
                 j++;
             }
         }
-        
+
         while(i <= mid) {
             res[arr[i]->index] += j - (mid + 1);
             tmp.push_back(arr[i]);
             i++;
         }
-        
+
         while(j <= end) {
             tmp.push_back(arr[j]);
             j++;
         }
-        
+
         for (int i = start; i <= end; i++) {
             arr[i] = tmp[i-start];
         }
