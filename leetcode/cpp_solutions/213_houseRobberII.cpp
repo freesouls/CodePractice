@@ -1,6 +1,38 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
+        if (nums.size() == 1) {
+            return nums[0];
+        }
+        return max(rob(nums, 0, nums.size()-1), rob(nums, 1, nums.size()));
+    }
+
+
+    int rob(vector<int>& nums, int start, int end) {
+        int pre_pre = 0;
+        int pre = 0;
+        bool pre_used = false;
+        for (int i = start; i < end; i++) {
+            int res = (pre_used ? pre_pre : pre) + nums[i];
+
+            if (res > pre) {
+                pre_used = true;
+            }
+            else {
+                res = pre;
+            }
+
+            pre_pre = pre;
+            pre = res;
+        }
+
+        return pre;
+    }
+};
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
         if (nums.size() == 0) {
             return 0;
         }
@@ -24,7 +56,7 @@ public:
         // if (end - start == 1){
         //     return nums[start];
         // }
-        
+
         if (end - start == 2){
             return max(nums[start], nums[start + 1]);
         }
