@@ -15,6 +15,7 @@ public:
             if (nums[i] < tailTable[0]) {
                 tailTable[0] = nums[i];
             }
+            // nums[i] >= tailTable[len-1] for no-decreasing 
             else if (nums[i] > tailTable[len - 1]) {
                 tailTable[len++] = nums[i];
             }
