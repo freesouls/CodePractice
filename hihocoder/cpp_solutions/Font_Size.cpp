@@ -21,23 +21,13 @@
 
 using namespace std;
 
-
-//void read_int(int &n)
-//{
-//    int c;
-//    while (isspace(c = getchar()));
-//    n = c - '0';
-//    while (isdigit(c = getchar()))
-//        n = n * 10 + c - '0';
-//}
-
-void read_from_file()
-{
-#define PC 1
-#ifdef PC
-    freopen("/Users/dirk/Documents/xcode/hihocoder/hihocoder/in.txt", "r", stdin);
-#endif
-}
+// void read_from_file()
+// {
+// #define PC 1
+// #ifdef PC
+//     freopen("/Users/dirk/Documents/xcode/hihocoder/hihocoder/in.txt", "r", stdin);
+// #endif
+// }
 
 int a[1001];
 
@@ -78,7 +68,7 @@ int font_size(int N, int P, int W, int H)
 
 int main()
 {
-    read_from_file();
+    // read_from_file();
     int t;
     scanf("%d", &t);
     while (t > 0) {
